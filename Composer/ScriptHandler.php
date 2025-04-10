@@ -316,17 +316,17 @@ EOF
         $php = static::getPhp(false);
         $phpArgs = implode(' ', static::getPhpArguments());
         $console = $consoleDir.'/console';
-        $console_args = '';
-        if ($event->getIO()->isDecorated()) {
-            $console_args = '--ansi';
-        }
 
-        $args = [
+        $args = array(
             $php,
             $phpArgs,
             $console,
-            $console_args,
-        ];
+        );
+
+        if ($event->getIO()->isDecorated()) {
+            $console_args = '--ansi';
+            $args[] = $console_args;
+        }
 
         $cmd_parts = explode(' --', $cmd);
 
